@@ -5,6 +5,7 @@ import (
 	"strings"
 )
 
+//DayTwoPartOneExecute Execute Day Two
 func DayTwoPartOneExecute() {
 	data := strings.Split(ReadFile(2)[0], ",")
 	var dataValues []int
@@ -13,7 +14,7 @@ func DayTwoPartOneExecute() {
 		dataValues = append(dataValues, val)
 	}
 	noun, verb := execute(dataValues)
-	println(100 * noun + verb)
+	println(100*noun + verb)
 }
 
 func execute(data []int) (int, int) {

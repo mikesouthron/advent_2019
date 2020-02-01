@@ -5,14 +5,15 @@ import (
 	"strconv"
 )
 
-type Row struct {
+type row struct {
 	pixels []int
 }
 
-type Layer struct {
-	rows []Row
+type layer struct {
+	rows []row
 }
 
+//RunDayEight run day 8
 func RunDayEight() {
 	data := ReadFile(8)[0]
 	layers := buildLayers(data)
@@ -46,10 +47,10 @@ func RunDayEight() {
 	}
 }
 
-func buildLayers(data string) []Layer {
-	layers := make([]Layer, 0)
+func buildLayers(data string) []layer {
+	layers := make([]layer, 0)
 
-	rows := make([]Row, 6)
+	rows := make([]row, 6)
 	pixels := make([]int, 25)
 
 	pixelCount := 0
@@ -60,13 +61,13 @@ func buildLayers(data string) []Layer {
 		pixels[pixelCount] = pixel
 		pixelCount = pixelCount + 1
 		if pixelCount == 25 {
-			rows[rowCount] = Row{pixels}
+			rows[rowCount] = row{pixels}
 			rowCount = rowCount + 1
 			pixels = make([]int, 25)
 			pixelCount = 0
 			if rowCount == 6 {
-				layers = append(layers, Layer{rows})
-				rows = make([]Row, 6)
+				layers = append(layers, layer{rows})
+				rows = make([]row, 6)
 				rowCount = 0
 			}
 		}
@@ -75,7 +76,7 @@ func buildLayers(data string) []Layer {
 	return layers
 }
 
-func calculateValidLayer(layers []Layer) {
+func calculateValidLayer(layers []layer) {
 	minZeroCount := 0
 	calculatedValue := 0
 

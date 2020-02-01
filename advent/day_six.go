@@ -6,6 +6,7 @@ import (
 	"sync/atomic"
 )
 
+//ExecuteDaySix run day six
 func ExecuteDaySix() {
 	lines := ReadFile(6)
 	orbits := make(map[string]string)
@@ -26,7 +27,7 @@ func ExecuteDaySix() {
 		for j, s := range san {
 			if y == s {
 				done = true
-				fmt.Println(i+j)
+				fmt.Println(i + j)
 				break
 			}
 		}
@@ -56,7 +57,6 @@ func listOrbitsFrom(orbits map[string]string, start string, list []string) []str
 	if val, ok := orbits[start]; ok {
 		list = append(list, val)
 		return listOrbitsFrom(orbits, val, list)
-	} else {
-		return list
 	}
+	return list
 }

@@ -6,6 +6,7 @@ import (
 	"strings"
 )
 
+//ExecuteDaySeven run day seven
 func ExecuteDaySeven() {
 	data := strings.Split(ReadFile(7)[0], ",")
 	var dataValues []int
@@ -53,21 +54,21 @@ func permutation(xs []int) (permuts [][]int) {
 	return permuts
 }
 
-type State struct {
+type stateS struct {
 	data []int
-	pos int
+	pos  int
 }
 
 func getOutput(inputs []int, dataValues []int) int {
 	input := 0
-	state := make([]State, 5)
+	state := make([]stateS, 5)
 
 	for i, value := range inputs {
 		data := make([]int, len(dataValues))
 		copy(data, dataValues)
 		newpos := 0
 		input, newpos, _ = RunIntCode(data, value, input, 0)
-		state[i] = State{data, newpos}
+		state[i] = stateS{data, newpos}
 	}
 
 	finished := false
@@ -78,7 +79,7 @@ func getOutput(inputs []int, dataValues []int) int {
 			data := state[i].data
 			previousInput := input
 			input, newpos, finished = RunIntCode(data, input, input, state[i].pos)
-			state[i] = State{data, newpos}
+			state[i] = stateS{data, newpos}
 			if i == 4 && finished {
 				return previousInput
 			}
@@ -88,4 +89,3 @@ func getOutput(inputs []int, dataValues []int) int {
 		}
 	}
 }
-

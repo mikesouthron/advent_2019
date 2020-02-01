@@ -5,6 +5,7 @@ import (
 	"strings"
 )
 
+//DayOneExecute run day one
 func DayOneExecute() {
 	lines := ReadFile(1)
 	var total int64 = 0
@@ -21,8 +22,5 @@ func fuelMass(mass, acc int64) int64 {
 	if newMass <= 0 {
 		return acc
 	}
-	return fuelMass(newMass, acc + newMass)
+	return fuelMass(newMass, acc+newMass)
 }
-
-
-

@@ -6,6 +6,7 @@ import (
 	"strings"
 )
 
+//ExecuteDayFive run day 5
 func ExecuteDayFive() {
 	data := strings.Split(ReadFile(5)[1], ",")
 	var dataValues []int
@@ -16,26 +17,9 @@ func ExecuteDayFive() {
 	RunIntCode(dataValues, 5, 5, 0)
 }
 
-//func execute(data []int) (int, int) {
-//	for n := 0; n <= 99; n++ {
-//		for v := 0; v <= 99; v++ {
-//			runValues := make([]int, len(data))
-//			copy(runValues, data)
-//			runValues[1] = n
-//			runValues[2] = v
-//			output := run(runValues)
-//			if output == 19690720 {
-//				return n, v
-//			}
-//		}
-//	}
-//	return 0, 0
-//}
-
-func RunIntCode(data []int, input, input_two, pos int) (int, int, bool) {
+//RunIntCode run int_code machine
+func RunIntCode(data []int, input, inputTwo, pos int) (int, int, bool) {
 	one := true
-	output := 0
-	finished := false
 	for {
 		s := strconv.Itoa(data[pos])
 		l := len(s)
@@ -49,11 +33,11 @@ func RunIntCode(data []int, input, input_two, pos int) (int, int, bool) {
 		modeTwo := 0
 		modeThree := 0
 
-		if l - 3 >= 0 {
+		if l-3 >= 0 {
 			modeOne, _ = strconv.Atoi(s[l-3 : l-2])
-			if l - 4 >= 0 {
+			if l-4 >= 0 {
 				modeTwo, _ = strconv.Atoi(s[l-4 : l-3])
-				if l - 5 >= 0 {
+				if l-5 >= 0 {
 					modeThree, _ = strconv.Atoi(s[l-5 : l-4])
 				}
 			}
@@ -95,7 +79,7 @@ func RunIntCode(data []int, input, input_two, pos int) (int, int, bool) {
 				data[updatePos] = input
 				one = false
 			} else {
-				data[updatePos] = input_two
+				data[updatePos] = inputTwo
 			}
 
 			pos = pos + 2
@@ -104,9 +88,8 @@ func RunIntCode(data []int, input, input_two, pos int) (int, int, bool) {
 		if opCode == 4 {
 			if modeOne == 0 {
 				return data[data[pos+1]], pos + 2, false
-			} else {
-				return data[pos+1], pos + 2, false
 			}
+			return data[pos+1], pos + 2, false
 		}
 
 		if opCode == 5 {
@@ -133,7 +116,6 @@ func RunIntCode(data []int, input, input_two, pos int) (int, int, bool) {
 			one := getValue(data, pos, 1, modeOne)
 			two := getValue(data, pos, 2, modeTwo)
 			three := data[pos+3]
-			//three := getValue(data, pos, 3, modeThree)
 			if one < two {
 				data[three] = 1
 			} else {
@@ -146,7 +128,6 @@ func RunIntCode(data []int, input, input_two, pos int) (int, int, bool) {
 			one := getValue(data, pos, 1, modeOne)
 			two := getValue(data, pos, 2, modeTwo)
 			three := data[pos+3]
-			//three := getValue(data, pos, 3, modeThree)
 			if one == two {
 				data[three] = 1
 			} else {
@@ -155,14 +136,11 @@ func RunIntCode(data []int, input, input_two, pos int) (int, int, bool) {
 			pos = pos + 4
 		}
 	}
-
-	return output, pos, finished
 }
 
 func getValue(data []int, pos, index, mode int) int {
 	if mode == 0 {
 		return data[data[pos+index]]
-	} else {
-		return data[pos+index]
 	}
+	return data[pos+index]
 }

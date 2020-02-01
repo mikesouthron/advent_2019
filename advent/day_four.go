@@ -7,6 +7,7 @@ import (
 	"sync/atomic"
 )
 
+//ExecuteDayFour run day 4
 //Go routine version is much much slower, go routine overhead is a big drain when the function is fast!
 func ExecuteDayFour() {
 	var wg sync.WaitGroup
@@ -16,7 +17,7 @@ func ExecuteDayFour() {
 		go func(i int) {
 			defer wg.Done()
 			s := strconv.Itoa(i)
-			if Match(s) {
+			if match(s) {
 				atomic.AddInt64(&count, 1)
 			}
 		}(i)
@@ -25,18 +26,19 @@ func ExecuteDayFour() {
 	fmt.Println(count)
 }
 
+//ExecuteDayFourSync run day 4 with no go routines
 func ExecuteDayFourSync() {
 	matches := 0
 	for i := 171309; i < 643603; i++ {
 		s := strconv.Itoa(i)
-		if Match(s) {
+		if match(s) {
 			matches = matches + 1
 		}
 	}
 	fmt.Println(matches)
 }
 
-func Match(s string) bool {
+func match(s string) bool {
 	match := true
 	anyDoubles := false
 	length := len(s)
@@ -49,7 +51,7 @@ func Match(s string) bool {
 			}
 			previous = make([]uint8, 0)
 		}
-		if j != length - 1 {
+		if j != length-1 {
 			if s[j] > s[j+1] {
 				match = false
 				break
