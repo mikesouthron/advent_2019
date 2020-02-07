@@ -12,7 +12,6 @@ func RunDayNine() {
 		val, _ := strconv.Atoi(strings.TrimSpace(input))
 		dataValues[i] = val
 	}
-	x, y, _ := RunIntCode(dataValues, 2, 1, 0)
-	println(x)
-	println(y)
+	output, _, _ := RunIntCode(dataValues, 2, 1, 0)
+	println(output)
 }
