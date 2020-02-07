@@ -8,7 +8,7 @@ import (
 
 func main() {
 	start := time.Now()
-	advent.RunDayEight()
+	advent.RunDayNine()
 	elapsed := time.Since(start)
 	fmt.Println(elapsed)
 	//advent.ExecuteDayFourSync()
